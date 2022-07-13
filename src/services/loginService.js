@@ -12,7 +12,7 @@ module.exports = {
 
         const { error, value } = auth;
     
-        if (error) return { code: 400, message: 'Some required fields are missing' };
+        if (error) return { code: 400, message: { message: 'Some required fields are missing' } };
     
         return value;
     },
@@ -23,7 +23,7 @@ module.exports = {
         });
         
         if (!findUser || findUser.password !== password) {
-            return { code: 400, message: 'Invalid fields' };
+            return { code: 400, message: { message: 'Invalid fields' } };
         }
 
         const { password: any, ...infos } = findUser;
