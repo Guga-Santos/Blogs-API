@@ -38,4 +38,10 @@ module.exports = {
 
         return createdUser;
     },
+    getAllUsers: async () => {
+        const users = await models.User.findAll({
+          attributes: { exclude: ['password'] },
+        });
+        return users;
+      },
 };

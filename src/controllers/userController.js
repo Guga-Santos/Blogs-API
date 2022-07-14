@@ -16,4 +16,8 @@ module.exports = {
 
         res.status(201).json({ token });
     },
+    getAllUsers: async (req, res) => {
+        const users = await userService.getAllUsers();
+        res.status(200).json(users);
+    },
 };
