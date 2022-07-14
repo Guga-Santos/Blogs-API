@@ -17,5 +17,8 @@ module.exports = {
 
         return createdCategory;
     },
-
+    getAllCategories: async () => {
+        const findAll = await models.Category.findAll();
+        return findAll;
+    },
 };
