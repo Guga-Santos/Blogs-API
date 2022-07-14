@@ -20,4 +20,12 @@ module.exports = {
         const users = await userService.getAllUsers();
         res.status(200).json(users);
     },
+    getUserById: async (req, res) => {
+        const { id } = req.params;
+        const user = await userService.getUserById(id);
+
+        if (user.code) return res.status(user.code).json(user.message);
+
+        res.status(200).json(user);
+    }
 };

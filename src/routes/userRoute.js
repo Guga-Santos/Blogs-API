@@ -8,6 +8,7 @@ const User = Router();
 // User.route('/').get()
 
 User.post('/', userController.newUserCreated);
+User.get('/:id', auth, userController.getUserById);
 User.get('/', auth, userController.getAllUsers);
 
 module.exports = User;

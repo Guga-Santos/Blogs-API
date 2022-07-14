@@ -44,4 +44,14 @@ module.exports = {
         });
         return users;
       },
+      getUserById: async (id) => {
+        const user = await models.User.findOne({
+            where: { id },
+            raw: true,
+            attributes: { exclude: ['password'] },
+        });
+        if (!user) return { code: 404, message: { message: 'User does not exist' } };
+
+        return user;
+    },
 };
