@@ -542,7 +542,7 @@ Ao iniciar este projeto você concorda com as diretrizes do Código de Conduta e
 
 # Requisitos Obrigatórios
 
-## 1 - Crie migrations para as entidades User, Categories, BlogPosts, PostCategories
+## 1 - Crie migrations para as entidades Users, Categories, BlogPosts, PostCategories
 
 - Esse teste fará uma conexão no banco utilizando a configuração de teste do arquivo `src/database/config/config.js`;
 - Suas `migrations` devem estar no diretório correto e respeitar a nomenclatura pedida no requisito;
@@ -552,7 +552,7 @@ Ao iniciar este projeto você concorda com as diretrizes do Código de Conduta e
 <details>
   <summary><strong>Os seguintes pontos serão avaliados:</strong></summary>
 
-  * **[Será validado que é possível fazer um INSERT e um SELECT na tabela User]**
+  * **[Será validado que é possível fazer um INSERT e um SELECT na tabela Users]**
     - O avaliador irá inserir um dado de exemplo na tabela `Users`;
     - O avaliador irá fazer um select, desse mesmo dado, na tabela `Users`.
 
