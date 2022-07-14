@@ -27,5 +27,5 @@ module.exports = {
         if (user.code) return res.status(user.code).json(user.message);
 
         res.status(200).json(user);
-    }
+    },
 };
