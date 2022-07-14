@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
         timestamps: false,
+        tableName: 'PostCategories',
     });
 
     PostCategory.associate = (models) => {
@@ -25,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             through: PostCategory,
             foreignKey: 'postId',
             otherKey: 'categoryId',
-            as: 'posts',
+            as: 'categories',
         });
     }
 
