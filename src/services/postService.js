@@ -23,5 +23,10 @@ module.exports = {
     
           return findById;
     },
+    getAllPostsIds: async () => {
+        const posts = await models.BlogPost.findAll({ raw: true });
+        const ids = posts.map((item) => item.id);
+        return ids;
+      },
 };
 // 

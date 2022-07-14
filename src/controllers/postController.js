@@ -10,4 +10,11 @@ module.exports = {
 
     res.status(200).json(getById);
   },
+  getAllPosts: async (req, res) => {
+    const getPostsIds = await postService.getAllPostsIds();
+    const allPosts = await Promise.all(getPostsIds
+        .map((id) => postService.findById(id)));
+    
+        res.status(200).json(allPosts);
+  },
 };
