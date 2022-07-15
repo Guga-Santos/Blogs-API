@@ -6,6 +6,7 @@ const BlogPost = Router();
 
 BlogPost.get('/:id', auth, postController.getById);
 BlogPost.get('/', auth, postController.getAllPosts);
+BlogPost.put('/:id', auth, postController.updatePost);
 BlogPost.post('/', auth, postController.createPost);
 
 module.exports = BlogPost;

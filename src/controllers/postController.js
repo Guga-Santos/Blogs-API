@@ -24,4 +24,16 @@ module.exports = {
 
     return res.status(201).json(post);
   },
+  updatePost: async (req, res) => {
+    const { data } = req.user;
+    const { id } = req.params;
+
+    const upPost = await postService.updatePost(data.id, id, req.body);
+
+    if (upPost.code) return res.status(upPost.code).json(upPost.message);
+
+    const updated = await postService.findById(upPost);
+
+    return res.status(200).json(updated);
+  },
 };

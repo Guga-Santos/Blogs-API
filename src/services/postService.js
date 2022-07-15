@@ -39,11 +39,9 @@ module.exports = {
         });
       
         const { error } = schema.validate(data);
-      
         if (error) return { code: 400, message: { message: 'Some required fields are missing' } };
       
         const categ = await models.Category.findAll({ where: { id: categoryIds }, raw: true });
-      
         if (categ.length < 1) return { code: 400, message: { message: '"categoryIds" not found' } };
       
         const newPost = await models.BlogPost.create({ title, content, userId: user.data.id });
@@ -53,6 +51,31 @@ module.exports = {
         await models.PostCategory.bulkCreate(newPostCateg);
       
         return newPost;
+      },
+      updatePost: async (id, postId, data) => {      
+        const { title, content } = data;
+        const schema = Joi.object({
+          title: Joi.string().required(),
+          content: Joi.string().required(),
+        });
+
+        const findPost = await models.BlogPost.findOne({ where: { id: postId }, raw: true });
+      
+        const { error } = schema.validate(data);
+        if (error) return { code: 400, message: { message: 'Some required fields are missing' } };
+      
+        if (id !== findPost.userId) return { code: 401, message: { message: 'Unauthorized user' } };
+        
+        const [updated] = await models.BlogPost.update({
+          title,
+          content,
+        }, { 
+          where: { id: Number(postId) },
+          raw: true,
+        });
+
+        return updated;
+        // Vai retornar apenas o id do post que será alterado.
       },
 };
 // 
