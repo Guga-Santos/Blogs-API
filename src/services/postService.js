@@ -77,5 +77,16 @@ module.exports = {
         return updated;
         // Vai retornar apenas o id do post que será alterado.
       },
+      deletePost: async (id, postId) => {
+        const findById = await models.BlogPost.findOne({ where: { id: postId }, raw: true });
+
+        if (!findById) return { code: 404, message: { message: 'Post does not exist' } };
+
+        if (id !== findById.userId) return { code: 401, message: { message: 'Unauthorized user' } };
+
+        await models.BlogPost.destroy({ where: { id: postId } });
+
+        return true;
+      },
 };
 // 

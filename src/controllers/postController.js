@@ -36,4 +36,14 @@ module.exports = {
 
     return res.status(200).json(updated);
   },
+  deletePost: async (req, res) => {
+    const { data } = req.user;
+    const { id } = req.params;
+
+    const deleted = await postService.deletePost(data.id, id);
+
+    if (deleted.code) return res.status(deleted.code).json(deleted.message);
+
+    res.status(204).end();
+  },
 };
