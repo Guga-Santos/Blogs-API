@@ -17,4 +17,11 @@ module.exports = {
     
         res.status(200).json(allPosts);
   },
+  createPost: async (req, res) => {
+    const post = await postService.createPost(req.user, req.body);
+
+    if (post.code) return res.status(post.code).json(post.message);
+
+    return res.status(201).json(post);
+  },
 };

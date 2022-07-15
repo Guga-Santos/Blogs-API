@@ -9,7 +9,10 @@ module.exports = async (req, res, next) => {
     
         if (!token || validate.error) return res.status(401).json({ message: 'Token not found' });
 
-        jwt.verify(token, process.env.JWT_SECRET);
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = verified;
+
+        // console.log(req.user);
     } catch (error) {
         return res.status(401).json({ message: 'Expired or invalid token' });
     }

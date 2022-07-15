@@ -8,8 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       content: DataTypes.STRING,
       userId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         foreignKey: true,
+        references: { 
+          model: 'Users', 
+          key: 'id' },
       },
       published: {
         allowNull: false,
@@ -21,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      timestamps: false,
+      createdAt: 'published',
+      updatedAt: 'updated',
     });
 
     BlogPost.associate = (models) => {
