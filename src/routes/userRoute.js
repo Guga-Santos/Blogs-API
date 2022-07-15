@@ -10,5 +10,6 @@ const User = Router();
 User.post('/', userController.newUserCreated);
 User.get('/:id', auth, userController.getUserById);
 User.get('/', auth, userController.getAllUsers);
+User.delete('/me', auth, userController.deleteUser);
 
 module.exports = User;

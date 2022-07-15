@@ -28,4 +28,11 @@ module.exports = {
 
         res.status(200).json(user);
     },
+    deleteUser: async (req, res) => {
+        const { id } = req.user.data;
+
+        await userService.deleteUser(id);
+
+        res.status(204).end();
+    },
 };

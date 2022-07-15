@@ -54,4 +54,9 @@ module.exports = {
 
         return user;
     },
+    deleteUser: async (id) => {
+        await models.User.destroy({ where: { id } });
+
+        return true;
+    },
 };
