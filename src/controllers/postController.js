@@ -46,4 +46,9 @@ module.exports = {
 
     res.status(204).end();
   },
+  searchQuery: async (req, res) => {
+    const { q } = req.query;
+    const search = await postService.searchQuery(q);
+    res.status(200).json(search);
+  },
 };

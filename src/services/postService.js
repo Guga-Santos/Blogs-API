@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { Op } = require('sequelize');
 const models = require('../database/models');
 
 module.exports = {
@@ -25,7 +26,8 @@ module.exports = {
           return findById;
     },
     getAllPostsIds: async () => {
-        const posts = await models.BlogPost.findAll({ raw: true });
+        const posts = await models.BlogPost.findAll();
+        console.log(posts);
         const ids = posts.map((item) => item.id);
         return ids;
       },
@@ -87,6 +89,23 @@ module.exports = {
         await models.BlogPost.destroy({ where: { id: postId } });
 
         return true;
+      },
+      searchQuery: async (query) => {
+        const search = await models.BlogPost.findAll({
+          include: [
+            { model: models.User, as: 'user', attributes: { exclude: 'password' } },
+            { model: models.Category, as: 'categories', through: { attributes: [] } },
+          ],
+          // https://sequelize.org/docs/v6/advanced-association-concepts/eager-loading/
+          where: {
+            [Op.or]: [
+              { title: { [Op.substring]: query } },
+              { content: { [Op.substring]: query } },
+            ],
+          },
+        });
+        // https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#:~:text=Sequelize%20provides%20several%20operators.
+        return search;
       },
 };
 // 
