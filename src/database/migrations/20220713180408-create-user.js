@@ -24,7 +24,7 @@ module.exports = {
       },
       image: {
         type: Sequelize.STRING
-      }
+      },
      }, {timeStamps: false});
 
   },

@@ -6,13 +6,15 @@ module.exports = async (req, res, next) => {
         const token = req.headers.authorization;
         const schema = Joi.string().required();
         const validate = schema.validate(token);
+
+        console.log(token);
     
         if (!token || validate.error) return res.status(401).json({ message: 'Token not found' });
 
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         req.user = verified;
 
-        // console.log(req.user);
+        // console.log(req.user.data);
     } catch (error) {
         return res.status(401).json({ message: 'Expired or invalid token' });
     }

@@ -42,6 +42,7 @@ module.exports = {
         const users = await models.User.findAll({
           attributes: { exclude: ['password'] },
         });
+
         return users;
       },
       getUserById: async (id) => {
@@ -51,7 +52,6 @@ module.exports = {
             attributes: { exclude: ['password'] },
         });
         if (!user) return { code: 404, message: { message: 'User does not exist' } };
-
         return user;
     },
     deleteUser: async (id) => {
